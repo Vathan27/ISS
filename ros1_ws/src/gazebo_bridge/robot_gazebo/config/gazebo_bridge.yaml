@@ -5,6 +5,8 @@ motion_prediction_topic: "motion_prediction"
 show_hd_map_rviz: true
 
 world_frame: "odom"
-control_command_topic: "/cmd_vel"
+# control_command_topic: "/cmd_vel"
+control_command_topic: "/ctrl_cmd"
+command_velocity_topic: "/cmd_vel"
 3d_lidar_topic: "/velodyne_points"
 2d_lidar_topic: "/scan"

@@ -14,6 +14,7 @@ from sensor_msgs import point_cloud2 as pc2
 from iss_manager.srv import SetGoal
 
 
+
 class GazeboBridgeNode:
     def __init__(self) -> None:
         self._ego_vehicle_name = rospy.get_param("robot_name", "ego_vehicle")
@@ -26,6 +27,9 @@ class GazeboBridgeNode:
         self._object_detection_pub = rospy.Publisher(rospy.get_param(
             "object_detection_topic"), ObjectDetection3DArray, queue_size=1)
         self._world_frame = rospy.get_param("world_frame", "map")
+
+        self._cmd_vel_pub = rospy.Publisher(rospy.get_param(
+            "command_velocity_topic"), Twist, queue_size=1)
 
         self._gazebo_states_sub = rospy.Subscriber(
             "/gazebo/model_states", ModelStates, self._gazebo_states_callback)
@@ -220,6 +224,8 @@ class GazeboBridgeNode:
         self._pub_vel_right_front_wheel.publish(vel_right_front_wheel)
         self._pub_pos_left_steering_hinge.publish(pos_left_steering_hinge)
         self._pub_pos_right_steering_hinge.publish(pos_right_steering_hinge)
+
+        
 
 
 if __name__ == "__main__":

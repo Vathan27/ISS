@@ -27,7 +27,7 @@ from visualization_msgs.msg import Marker, MarkerArray
 from iss_manager.msg import State, StateArray, StateArrayArray, ObjectDetection3DArray
 from iss_manager.srv import SetGoal, SetGoalResponse, EmergencyStop
 
-DEBUG = False
+DEBUG = True
 DEBUG_MSGS = True
 class PlanningManagerNode:
     def __init__(self) -> None:
