@@ -33,6 +33,8 @@ class GazeboBridgeNode:
 
         self._gazebo_states_sub = rospy.Subscriber(
             "/gazebo/model_states", ModelStates, self._gazebo_states_callback)
+        
+        self._cmd_vel_msg = Twist()
 
         self._tf_broadcaster = tf.TransformBroadcaster()
         self._ego_tf_pub_timer = rospy.Timer(
@@ -225,7 +227,14 @@ class GazeboBridgeNode:
         self._pub_pos_left_steering_hinge.publish(pos_left_steering_hinge)
         self._pub_pos_right_steering_hinge.publish(pos_right_steering_hinge)
 
-        
+
+        # transform ctrl_cmd to cmd_vel
+        self._cmd_vel_msg.linear.x = msg.throttle   # linear velocity
+
+        self._cmd_vel_msg.angular.z = msg.steering
+
+
+
 
 
 if __name__ == "__main__":
