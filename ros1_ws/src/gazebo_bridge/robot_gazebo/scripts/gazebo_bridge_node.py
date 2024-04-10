@@ -231,7 +231,9 @@ class GazeboBridgeNode:
         # transform ctrl_cmd to cmd_vel
         self._cmd_vel_msg.linear.x = msg.throttle   # linear velocity
 
-        self._cmd_vel_msg.angular.z = msg.steering
+        self._cmd_vel_msg.angular.z = msg.throttle * math.tan(msg.steering) / wheelbase    # angular velocity
+
+        self._cmd_vel_pub.publish(self._cmd_vel_msg)
 
 
 
